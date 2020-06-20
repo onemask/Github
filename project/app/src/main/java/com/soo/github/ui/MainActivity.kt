@@ -1,7 +1,8 @@
-package com.soo.github
+package com.soo.github.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.soo.github.R
 
 class MainActivity : AppCompatActivity() {
 
