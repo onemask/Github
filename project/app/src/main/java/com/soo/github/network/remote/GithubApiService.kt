@@ -4,7 +4,7 @@ import com.soo.github.network.model.User
 import io.reactivex.Single
 import retrofit2.http.GET
 
-interface GithubRemoteApiService {
+interface GithubApiService {
     @GET("/users")
     fun getUserList() : Single<List<User>>
 }
