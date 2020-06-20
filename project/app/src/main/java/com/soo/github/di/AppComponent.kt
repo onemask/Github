@@ -2,6 +2,10 @@ package com.soo.github.di
 
 import android.app.Application
 import com.soo.github.app.GithubApplication
+import com.soo.github.di.module.ActivityBinder
+import com.soo.github.di.module.DataModule
+import com.soo.github.di.module.NetworkModule
+import com.soo.github.di.module.ViewModelFactoryModule
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjector
@@ -11,7 +15,11 @@ import javax.inject.Singleton
 @Singleton
 @Component(
     modules = [
-        AndroidSupportInjectionModule::class
+        AndroidSupportInjectionModule::class,
+        NetworkModule::class,
+        DataModule::class,
+        ActivityBinder::class,
+        ViewModelFactoryModule::class
     ]
 )
 
