@@ -1,44 +1,23 @@
 package com.soo.github.ui
 
 import android.os.Bundle
-import androidx.activity.viewModels
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import androidx.navigation.ui.AppBarConfiguration
 import com.soo.github.R
-import com.soo.github.base.BaseActivity
-import com.soo.github.databinding.ActivityMainBinding
-import com.soo.github.ui.adapter.UsersAdapter
-import com.soo.github.ui.vm.MainViewModel
-import javax.inject.Inject
+import dagger.android.support.DaggerAppCompatActivity
 
-class MainActivity : BaseActivity<ActivityMainBinding>(layoutRes = R.layout.activity_main) {
+class MainActivity : DaggerAppCompatActivity() {
 
-    @Inject
-    lateinit var viewModelFactory : ViewModelProvider.Factory
-
-    private val adapter = UsersAdapter()
-
-    override val viewModel : MainViewModel by viewModels { viewModelFactory }
+    private lateinit var appBarConfiguration: AppBarConfiguration
+    private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setupAdapter()
-        setupBind()
-    }
+        setContentView(R.layout.activity_main)
 
-    override fun setupViewModel() {
-        binding.vm = viewModel
-
-    }
-
-    private fun setupBind(){
-        viewModel.userList.observe(this, Observer {
-            adapter.setData(it)
-        })
-    }
-
-    private fun setupAdapter(){
-        binding.rvUserList.adapter = adapter
+        navController = Navigation.findNavController(this, R.id.product_nav_host_fragment)
+        appBarConfiguration = AppBarConfiguration(navController.graph)
     }
 
 
