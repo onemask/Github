@@ -1,4 +1,4 @@
-package com.soo.github.ui
+package com.soo.github.ui.user
 
 import android.os.Bundle
 import androidx.navigation.NavController

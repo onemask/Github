@@ -1,4 +1,4 @@
-package com.soo.github.ui.adapter
+package com.soo.github.ui.user.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,9 +7,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.soo.github.R
 import com.soo.github.databinding.ItemUserBinding
 import com.soo.github.network.model.User
-import com.soo.github.ui.adapter.viewholder.UserViewHolder
+import com.soo.github.ui.user.adapter.viewholder.UserViewHolder
+import com.soo.github.ui.user.vm.MainViewModel
 
-class UsersAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class UsersAdapter(private val viewModel: MainViewModel) :
+    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val dataSet = ArrayList<User>()
 
@@ -23,15 +25,19 @@ class UsersAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         return UserViewHolder(item)
     }
 
-    override fun getItemCount(): Int  = dataSet.size
+    override fun getItemCount(): Int = dataSet.size
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        (holder as UserViewHolder).bind(data = dataSet[position])
+        (holder as UserViewHolder).bind(data = dataSet[position], viewModel = viewModel)
     }
 
-    fun setData(data : List<User>){
+    fun setData(data: List<User>) {
         dataSet.clear()
         dataSet.addAll(data)
         notifyDataSetChanged()
     }
+}
+
+interface OnClickListener {
+    fun onClick(item: User)
 }

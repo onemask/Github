@@ -1,7 +1,7 @@
-package com.soo.github.ui.di
+package com.soo.github.ui.user.di
 
 import com.soo.github.di.scope.PerFragment
-import com.soo.github.ui.MainFragment
+import com.soo.github.ui.user.MainFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 

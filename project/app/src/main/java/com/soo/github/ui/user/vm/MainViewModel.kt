@@ -1,4 +1,4 @@
-package com.soo.github.ui.vm
+package com.soo.github.ui.user.vm
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -17,6 +17,9 @@ class MainViewModel @Inject constructor(private val githubRepository: GithubRepo
     private val _userList = MutableLiveData<List<User>>()
     val userList: LiveData<List<User>> get() = _userList
 
+    private val _user = MutableLiveData<User>()
+    val user: LiveData<User> get() = _user
+
     init {
         getUserList()
     }
@@ -31,5 +34,9 @@ class MainViewModel @Inject constructor(private val githubRepository: GithubRepo
                 Timber.e("${it.printStackTrace()}")
             })
             .addTo(disposable)
+    }
+
+    fun showUserDetail(data: User) {
+        _user.value = data
     }
 }
