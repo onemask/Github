@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+                name="user"
+                type="com.soo.github.network.model.User" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/iv_user_thumnail"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                app:placeholderImage="@drawable/ic_launcher_foreground"
+                bind:srcCompat="@{user.avatarUrl}"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="15dp"
+                android:adjustViewBounds="true"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+                android:id="@+id/tv_user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:text="@{user.login}"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_user_thumnail"
+                app:layout_constraintStart_toEndOf="@id/iv_user_thumnail"
+                app:layout_constraintTop_toTopOf="@+id/iv_user_thumnail"
+                tools:text="프로필 이름" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
