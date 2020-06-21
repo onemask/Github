@@ -4,12 +4,18 @@
         xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
+        <variable
+                name="vm"
+                type="com.soo.github.ui.user.vm.MainViewModel" />
+
         <variable
                 name="user"
                 type="com.soo.github.network.model.User" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+            android:onClick="@{()->vm.showUserDetail(user)}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+                name="vm"
+                type="com.soo.github.ui.vm.UserOverViewViewModel" />
+
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".ui.userdetail.UserOverViewFragment">
+
+        <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/iv_user_image"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="25dp"
+                android:adjustViewBounds="true"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:placeholderImage="@drawable/ic_launcher_foreground" />
+
+        <TextView
+                android:id="@+id/tv_user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_user_image"
+                app:layout_constraintStart_toEndOf="@+id/iv_user_image"
+                app:layout_constraintTop_toTopOf="@+id/iv_user_image"
+                tools:text="유저 이름" />
+
+        <TextView
+                android:id="@+id/tv_user_login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_user_image"
+                app:layout_constraintStart_toEndOf="@+id/iv_user_image"
+                app:layout_constraintTop_toBottomOf="@+id/tv_user_name"
+                tools:text="로그인" />
+
+        <TextView
+                android:id="@+id/tv_bio"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/iv_user_image"
+                app:layout_constraintTop_toBottomOf="@+id/iv_user_image"
+                tools:text="bio" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
