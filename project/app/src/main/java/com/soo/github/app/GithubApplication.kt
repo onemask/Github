@@ -1,6 +1,6 @@
 package com.soo.github.app
 
-import com.soo.github.BuildConfig
+import com.facebook.drawee.backends.pipeline.Fresco
 import com.soo.github.di.DaggerAppComponent
 import dagger.android.AndroidInjector
 import dagger.android.DaggerApplication
@@ -12,8 +12,9 @@ class GithubApplication : DaggerApplication() {
 
     override fun onCreate() {
         super.onCreate()
-        if (BuildConfig.DEBUG)
-            Timber.plant(Timber.DebugTree())
+        Timber.plant(Timber.DebugTree())
+        Fresco.initialize(this)
+
     }
 
     override fun applicationInjector(): AndroidInjector<out DaggerApplication> = applicationInjector
