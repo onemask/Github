@@ -1,8 +1,11 @@
 package com.soo.github.network.remote
 
 import com.soo.github.network.model.User
+import com.soo.github.network.model.UserOverView
 import io.reactivex.Single
 
 interface GithubRemoteDataSource {
-    fun getUserList() : Single<List<User>>
+    fun getUserList(): Single<List<User>>
+
+    fun getUserOverView(user: String): Single<UserOverView>
 }
