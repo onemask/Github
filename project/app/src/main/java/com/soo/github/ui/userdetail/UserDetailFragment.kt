@@ -7,8 +7,9 @@ import com.soo.github.base.BaseViewModel
 import com.soo.github.constants.Constants
 import com.soo.github.databinding.FragmentUserDetailBinding
 import com.soo.github.ui.userdetail.adapter.ViewPagerAdapter
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class UserDetailFragment :  BaseFragment<FragmentUserDetailBinding>(
     R.layout.fragment_user_detail
 ) {

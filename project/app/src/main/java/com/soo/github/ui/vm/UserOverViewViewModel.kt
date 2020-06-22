@@ -1,5 +1,6 @@
 package com.soo.github.ui.vm
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.soo.github.base.BaseViewModel
@@ -9,9 +10,8 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
-import javax.inject.Inject
 
-class UserOverViewViewModel @Inject constructor(private val githubRepository: GithubRepository) :
+class UserOverViewViewModel @ViewModelInject constructor(private val githubRepository: GithubRepository) :
     BaseViewModel() {
 
     private val _userOverView = MutableLiveData<UserOverView>()

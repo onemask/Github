@@ -4,22 +4,20 @@ import android.os.Bundle
 import androidx.core.net.toUri
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import com.soo.github.R
 import com.soo.github.base.BaseFragment
 import com.soo.github.constants.Constants
 import com.soo.github.databinding.FragmentUserOverViewBinding
 import com.soo.github.ui.vm.UserOverViewViewModel
-import javax.inject.Inject
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class UserOverViewFragment :
-    BaseFragment<FragmentUserOverViewBinding>(layoutRes = R.layout.fragment_user_over_view) {
+        BaseFragment<FragmentUserOverViewBinding>(layoutRes = R.layout.fragment_user_over_view) {
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
     private var userName: String? = ""
-    override val viewModel: UserOverViewViewModel by viewModels { viewModelFactory }
+    override val viewModel by viewModels<UserOverViewViewModel>()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
