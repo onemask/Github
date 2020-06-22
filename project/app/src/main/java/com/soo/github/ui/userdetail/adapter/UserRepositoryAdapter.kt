@@ -10,6 +10,7 @@ import com.soo.github.network.model.UserRepository
 import com.soo.github.ui.userdetail.adapter.viewholder.UserRepositoryViewHolder
 import com.soo.github.ui.vm.UserDetailViewModel
 
+//TODO("다른 item field 를 참조함 . fullname 으로")
 class UserRepositoryAdapter(private val viewModel: UserDetailViewModel) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
