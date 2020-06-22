@@ -2,6 +2,7 @@ package com.soo.github.network.remote
 
 import com.soo.github.network.model.User
 import com.soo.github.network.model.UserOverView
+import com.soo.github.network.model.UserRepository
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -12,4 +13,7 @@ interface GithubApiService {
 
     @GET("/users/{user}")
     fun getUserOverView(@Path("user") user: String): Single<UserOverView>
+
+    @GET("/users/{user}/repos")
+    fun getUserRepos(@Path("user") user: String): Single<List<UserRepository>>
 }
