@@ -1,26 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
+        <variable
+                name="vm"
+                type="com.soo.github.ui.vm.UserDetailViewModel" />
+
+        <variable
+                name="userRepo"
+                type="com.soo.github.network.model.UserRepository" />
 
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="25dp"
+            android:paddingEnd="25dp">
 
         <TextView
-            android:id="@+id/tv_repo_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="25dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="프로필 이름" />
+                android:id="@+id/tv_repo_title"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:text="@{userRepo.name}"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="repo name" />
+
+        <TextView
+                android:id="@+id/tv_start_count"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginTop="5dp"
+                android:drawableStart="@drawable/ic_star_border_12px"
+                android:gravity="top"
+                android:text="@{userRepo.watchers.toString()}"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_repo_title"
+                tools:text="0" />
+
+        <TextView
+                android:id="@+id/tv_fork_count"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginStart="5dp"
+                android:drawableStart="@drawable/ic_octicons_git_branch_12px"
+                android:gravity="top"
+                android:text="@{userRepo.forksCount.toString()}"
+                android:textSize="12sp"
+                app:layout_constraintStart_toEndOf="@+id/tv_start_count"
+                app:layout_constraintTop_toTopOf="@+id/tv_start_count"
+                tools:text="0" />
+
+        <TextView
+                android:id="@+id/tv_time"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginStart="5dp"
+                android:drawableStart="@drawable/ic_schedule_12px"
+                android:gravity="top"
+                android:text="@{userRepo.createdAt.substring(0,7)}"
+                android:textSize="12sp"
+                app:layout_constraintStart_toEndOf="@+id/tv_fork_count"
+                app:layout_constraintTop_toTopOf="@+id/tv_fork_count"
+                tools:text="0" />
+
+        <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                app:layout_constraintBottom_toBottomOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
