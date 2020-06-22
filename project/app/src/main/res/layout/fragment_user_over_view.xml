@@ -6,10 +6,12 @@
     <data>
 
         <variable
+                name="userOverView"
+                type="com.soo.github.network.model.UserOverView" />
+
+        <variable
                 name="vm"
-                type="com.soo.github.ui.vm.UserOverViewViewModel" />
-
-
+                type="com.soo.github.ui.vm.UserDetailViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -33,6 +35,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="25dp"
+                android:text="@{userOverView.name}"
                 app:layout_constraintBottom_toBottomOf="@+id/iv_user_image"
                 app:layout_constraintStart_toEndOf="@+id/iv_user_image"
                 app:layout_constraintTop_toTopOf="@+id/iv_user_image"
@@ -43,6 +46,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="25dp"
+                android:text="@{userOverView.login}"
                 app:layout_constraintBottom_toBottomOf="@+id/iv_user_image"
                 app:layout_constraintStart_toEndOf="@+id/iv_user_image"
                 app:layout_constraintTop_toBottomOf="@+id/tv_user_name"
@@ -53,6 +57,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
+                android:text="@{userOverView.bio}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/iv_user_image"
                 app:layout_constraintTop_toBottomOf="@+id/iv_user_image"

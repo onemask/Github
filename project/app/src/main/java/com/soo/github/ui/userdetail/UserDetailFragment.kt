@@ -13,7 +13,6 @@ import dagger.hilt.android.AndroidEntryPoint
 class UserDetailFragment :  BaseFragment<FragmentUserDetailBinding>(
     R.layout.fragment_user_detail
 ) {
-
     private var userName: String? = ""
     private lateinit var viewPagerAdapter: ViewPagerAdapter
 

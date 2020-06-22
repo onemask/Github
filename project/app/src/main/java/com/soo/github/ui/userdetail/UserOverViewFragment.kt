@@ -8,7 +8,7 @@ import com.soo.github.R
 import com.soo.github.base.BaseFragment
 import com.soo.github.constants.Constants
 import com.soo.github.databinding.FragmentUserOverViewBinding
-import com.soo.github.ui.vm.UserOverViewViewModel
+import com.soo.github.ui.vm.UserDetailViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -16,7 +16,7 @@ class UserOverViewFragment :
         BaseFragment<FragmentUserOverViewBinding>(layoutRes = R.layout.fragment_user_over_view) {
 
     private var userName: String? = ""
-    override val viewModel by viewModels<UserOverViewViewModel>()
+    override val viewModel by viewModels<UserDetailViewModel>()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,11 +40,8 @@ class UserOverViewFragment :
 
     private fun setupBind() {
         viewModel.userOverView.observe(viewLifecycleOwner, Observer {
+            binding.userOverView = it
             binding.ivUserImage.setImageURI(it.avatarUrl.toUri())
-            binding.tvBio.text = it.bio
-            binding.tvUserLogin.text = it.login
-            binding.tvUserName.text = it.name
-
         })
     }
 
