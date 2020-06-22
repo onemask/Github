@@ -1,39 +1,65 @@
 package com.soo.github.ui.userdetail
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.DividerItemDecoration
 import com.soo.github.R
 import com.soo.github.base.BaseFragment
-import com.soo.github.base.BaseViewModel
+import com.soo.github.constants.Constants
 import com.soo.github.databinding.FragmentUserRepositoryBinding
-import javax.inject.Inject
+import com.soo.github.ui.userdetail.adapter.UserRepositoryAdapter
+import com.soo.github.ui.vm.UserDetailViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
 
-class UserRepositoryFragment(override val viewModel: BaseViewModel) : BaseFragment<FragmentUserRepositoryBinding>(layoutRes = R.layout.fragment_user_repository) {
+@AndroidEntryPoint
+class UserRepositoryFragment :
+    BaseFragment<FragmentUserRepositoryBinding>(layoutRes = R.layout.fragment_user_repository) {
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+    private var userName: String? = ""
+    private val adapter by lazy { UserRepositoryAdapter(viewModel) }
+
+    override val viewModel by viewModels<UserDetailViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-
+            userName = it.getString(Constants.USERNAME)
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_user_repository, container, false)
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        userName?.let {
+            viewModel.getUserRepositories(it)
+        }
+        setupAdapter()
+        setupBind()
     }
 
-   
+    private fun setupBind() {
+        viewModel.userRepositories.observe(viewLifecycleOwner, Observer {
+            adapter.setData(it)
+        })
+    }
+
+    private fun setupAdapter() {
+        binding.rvUserRepo.adapter = adapter
+        binding.rvUserRepo.addItemDecoration(DividerItemDecoration(context, 1))
+    }
+
     override fun setupViewModel() {
-
+        binding.vm = viewModel
     }
+
+
+    companion object {
+        fun newInstance(userName: String) = UserRepositoryFragment().apply {
+            arguments = Bundle().apply {
+                putString(Constants.USERNAME, userName)
+            }
+        }
+    }
+
 }
