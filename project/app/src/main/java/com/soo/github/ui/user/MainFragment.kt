@@ -38,7 +38,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>(layoutRes = R.layout.frag
             adapter.setData(it)
         })
 
-        //TODO("BackButton 을 구현 하기 위해서는 너가 singleEvent 를 정의해야 할것이다. ")
+        //TODO("BackButton 을 구현 하기 위해서는 singleEvent 정의 ")
         viewModel.user.observe(viewLifecycleOwner, Observer {
             val args = Bundle()
             args.putString(Constants.USERNAME, it.login)
