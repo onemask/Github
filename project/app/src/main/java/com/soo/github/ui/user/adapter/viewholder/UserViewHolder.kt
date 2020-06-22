@@ -7,7 +7,7 @@ import com.soo.github.ui.user.vm.MainViewModel
 
 class UserViewHolder(private val binding: ItemUserBinding) : RecyclerView.ViewHolder(binding.root) {
     fun bind(data: User,viewModel: MainViewModel) {
-        binding.user = data
         binding.vm = viewModel
+        binding.user = data
     }
 }

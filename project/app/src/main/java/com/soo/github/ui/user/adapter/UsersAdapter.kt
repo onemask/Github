@@ -37,7 +37,3 @@ class UsersAdapter(private val viewModel: MainViewModel) :
         notifyDataSetChanged()
     }
 }
-
-interface OnClickListener {
-    fun onClick(item: User)
-}
