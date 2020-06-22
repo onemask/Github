@@ -16,4 +16,7 @@ interface GithubApiService {
 
     @GET("/users/{user}/repos")
     fun getUserRepos(@Path("user") user: String): Single<List<UserRepository>>
+
+    @GET("/users/{user}/starred")
+    fun getUserStarred(@Path("user") user: String): Single<List<UserRepository>>
 }

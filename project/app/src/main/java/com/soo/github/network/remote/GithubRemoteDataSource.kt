@@ -10,6 +10,7 @@ interface GithubRemoteDataSource {
 
     fun getUserOverView(user: String): Single<UserOverView>
 
-    fun getUserRepos(user : String) : Single<List<UserRepository>>
+    fun getUserRepos(user: String): Single<List<UserRepository>>
 
+    fun getUserStarred(user: String): Single<List<UserRepository>>
 }

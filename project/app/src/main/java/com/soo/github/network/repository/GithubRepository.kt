@@ -22,4 +22,8 @@ class GithubRepository(private val githubApiService: GithubApiService) :
         return githubApiService.getUserRepos(user)
     }
 
+    override fun getUserStarred(user: String): Single<List<UserRepository>> {
+        return githubApiService.getUserStarred(user)
+    }
+
 }
