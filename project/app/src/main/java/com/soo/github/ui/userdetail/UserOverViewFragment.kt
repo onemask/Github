@@ -38,11 +38,7 @@ class UserOverViewFragment :
     }
 
     companion object {
-        fun newInstance(userName: String) = UserOverViewFragment().apply {
-            arguments = Bundle().apply {
-                putString(Constants.USERNAME, userName)
-            }
-        }
+        fun newInstance() = UserOverViewFragment()
     }
 
 }

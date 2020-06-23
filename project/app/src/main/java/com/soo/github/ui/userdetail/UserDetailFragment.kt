@@ -1,14 +1,12 @@
 package com.soo.github.ui.userdetail
 
 import android.os.Bundle
-import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.navArgs
 import com.soo.github.R
 import com.soo.github.base.BaseFragment
 import com.soo.github.base.BaseViewModel
 import com.soo.github.databinding.FragmentUserDetailBinding
 import com.soo.github.ui.userdetail.adapter.ViewPagerAdapter
-import com.soo.github.ui.vm.UserDetailViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
