@@ -15,16 +15,8 @@ import dagger.hilt.android.AndroidEntryPoint
 class UserOverViewFragment :
         BaseFragment<FragmentUserOverViewBinding>(layoutRes = R.layout.fragment_user_over_view) {
 
-    private var userName: String? = ""
+    private val userName by lazy { arguments?.getString(Constants.USERNAME) }
     override val viewModel by viewModels<UserDetailViewModel>()
-
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            userName = it.getString(Constants.USERNAME)
-        }
-    }
 
     override fun setupViewModel() {
         binding.vm = viewModel

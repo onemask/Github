@@ -16,18 +16,9 @@ import dagger.hilt.android.AndroidEntryPoint
 class UserStarredFragment :
     BaseFragment<FragmentUserStarredBinding>(layoutRes = R.layout.fragment_user_starred) {
 
-    private var userName: String? = ""
-
+    private val userName by lazy { arguments?.getString(Constants.USERNAME) }
     private val adapter by lazy { UserRepositoryAdapter(viewModel) }
-
     override val viewModel by viewModels<UserDetailViewModel>()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            userName = it.getString(Constants.USERNAME)
-        }
-    }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -45,8 +36,11 @@ class UserStarredFragment :
     }
 
     private fun setupAdapter() {
-        binding.rvUserStarred.adapter = adapter
-        binding.rvUserStarred.addItemDecoration(DividerItemDecoration(context, 1))
+        binding.rvUserStarred.also {
+            it.adapter = adapter
+            it.addItemDecoration(DividerItemDecoration(context, 1))
+
+        }
     }
 
     companion object {

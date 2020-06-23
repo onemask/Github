@@ -17,17 +17,9 @@ import dagger.hilt.android.AndroidEntryPoint
 class UserRepositoryFragment :
     BaseFragment<FragmentUserRepositoryBinding>(layoutRes = R.layout.fragment_user_repository) {
 
-    private var userName: String? = ""
+    private val userName by lazy { arguments?.getString(Constants.USERNAME) }
     private val adapter by lazy { UserRepositoryAdapter(viewModel) }
-
     override val viewModel by viewModels<UserDetailViewModel>()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            userName = it.getString(Constants.USERNAME)
-        }
-    }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -45,14 +37,15 @@ class UserRepositoryFragment :
     }
 
     private fun setupAdapter() {
-        binding.rvUserRepo.adapter = adapter
-        binding.rvUserRepo.addItemDecoration(DividerItemDecoration(context, 1))
+        binding.rvUserRepo.also {
+            it.adapter = adapter
+            it.addItemDecoration(DividerItemDecoration(context, 1))
+        }
     }
 
     override fun setupViewModel() {
         binding.vm = viewModel
     }
-
 
     companion object {
         fun newInstance(userName: String) = UserRepositoryFragment().apply {
