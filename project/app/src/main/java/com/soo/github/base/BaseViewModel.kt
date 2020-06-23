@@ -19,4 +19,11 @@ open class BaseViewModel : ViewModel() {
         disposable.clear()
     }
 
+    open fun hideLoading() {
+        _loadingState.value = false
+    }
+
+    open fun showLoading() {
+        _loadingState.value = true
+    }
 }
