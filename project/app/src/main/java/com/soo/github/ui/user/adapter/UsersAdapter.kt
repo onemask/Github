@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.soo.github.R
 import com.soo.github.databinding.ItemUserBinding
 import com.soo.github.network.model.User
-import com.soo.github.ui.user.adapter.viewholder.UserViewHolder
 import com.soo.github.ui.user.vm.MainViewModel
 
 class UsersAdapter(private val viewModel: MainViewModel) :
@@ -35,5 +34,12 @@ class UsersAdapter(private val viewModel: MainViewModel) :
         dataSet.clear()
         dataSet.addAll(data)
         notifyDataSetChanged()
+    }
+}
+
+class UserViewHolder(private val binding: ItemUserBinding) : RecyclerView.ViewHolder(binding.root) {
+    fun bind(data: User,viewModel: MainViewModel) {
+        binding.vm = viewModel
+        binding.user = data
     }
 }
