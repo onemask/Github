@@ -5,6 +5,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import com.soo.github.ui.userdetail.UserOverViewFragment
 import com.soo.github.ui.userdetail.UserRepositoryFragment
+import com.soo.github.ui.userdetail.UserStarredFragment
 
 class ViewPagerAdapter(fragmentManager: FragmentManager, userName: String) : FragmentPagerAdapter(
     fragmentManager,
@@ -14,7 +15,8 @@ class ViewPagerAdapter(fragmentManager: FragmentManager, userName: String) : Fra
 
     private val fragmentList = listOf(
         UserOverViewFragment.newInstance(userName),
-        UserRepositoryFragment.newInstance(userName)
+        UserRepositoryFragment.newInstance(userName),
+        UserStarredFragment.newInstance(userName)
     )
 
     override fun getPageTitle(position: Int): CharSequence? {
