@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.DividerItemDecoration
 import com.soo.github.R
 import com.soo.github.base.BaseFragment
 import com.soo.github.constants.Constants
@@ -31,6 +32,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>(layoutRes = R.layout.frag
 
     private fun setupAdpater() {
         binding.rvUserList.adapter = adapter
+        binding.rvUserList.addItemDecoration(DividerItemDecoration(context, 1))
     }
 
     private fun setupBind() {
@@ -42,7 +44,10 @@ class MainFragment : BaseFragment<FragmentMainBinding>(layoutRes = R.layout.frag
         viewModel.user.observe(viewLifecycleOwner, Observer {
             val args = Bundle()
             args.putString(Constants.USERNAME, it.login)
-            findNavController().navigate(R.id.action_main_to_detail, args)
+            it.login?.let { name ->
+                val action = MainFragmentDirections.actionMainToDetail(takeUserNames = it.login)
+                findNavController().navigate(action)
+            }
         })
     }
 
