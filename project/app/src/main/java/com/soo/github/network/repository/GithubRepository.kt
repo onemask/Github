@@ -6,24 +6,28 @@ import com.soo.github.network.model.UserRepository
 import com.soo.github.network.remote.GithubApiService
 import com.soo.github.network.remote.GithubRemoteDataSource
 import io.reactivex.Single
+import io.reactivex.schedulers.Schedulers
 
 class GithubRepository(private val githubApiService: GithubApiService) :
     GithubRemoteDataSource {
+
+    private val ioScheduler = Schedulers.io()
+
     override fun getUserList(): Single<List<User>> {
         //TODO("localRepository랑 분리 필요")
-        return githubApiService.getUserList()
+        return githubApiService.getUserList().subscribeOn(ioScheduler)
     }
 
     override fun getUserOverView(user: String): Single<UserOverView> {
-        return githubApiService.getUserOverView(user)
+        return githubApiService.getUserOverView(user).subscribeOn(ioScheduler)
     }
 
     override fun getUserRepos(user: String): Single<List<UserRepository>> {
-        return githubApiService.getUserRepos(user)
+        return githubApiService.getUserRepos(user).subscribeOn(ioScheduler)
     }
 
     override fun getUserStarred(user: String): Single<List<UserRepository>> {
-        return githubApiService.getUserStarred(user)
+        return githubApiService.getUserStarred(user).subscribeOn(ioScheduler)
     }
 
 }
