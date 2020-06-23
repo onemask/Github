@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.DividerItemDecoration
 import com.soo.github.R
 import com.soo.github.base.BaseFragment
 import com.soo.github.constants.Constants
@@ -27,15 +26,19 @@ class MainFragment : BaseFragment<FragmentMainBinding>(layoutRes = R.layout.frag
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         setupAdpater()
-        setupBind()
+        setupObserve()
+        showContents()
+    }
+
+    private fun showContents() {
+        viewModel.getUserList()
     }
 
     private fun setupAdpater() {
         binding.rvUserList.adapter = adapter
-        binding.rvUserList.addItemDecoration(DividerItemDecoration(context, 1))
     }
 
-    private fun setupBind() {
+    private fun setupObserve() {
         viewModel.userList.observe(viewLifecycleOwner, Observer {
             adapter.setData(it)
         })
