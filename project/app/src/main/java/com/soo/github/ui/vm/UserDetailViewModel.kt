@@ -21,6 +21,9 @@ class UserDetailViewModel @ViewModelInject constructor(private val githubReposit
     private val _userRepositories = MutableLiveData<List<UserRepository>>()
     val userRepositories: LiveData<List<UserRepository>> get() = _userRepositories
 
+    private val _userStarred = MutableLiveData<List<UserRepository>>()
+    val userStarred: LiveData<List<UserRepository>> get() = _userStarred
+
 
     fun getUserOverView(userName: String) {
         githubRepository.getUserOverView(userName)
@@ -48,6 +51,21 @@ class UserDetailViewModel @ViewModelInject constructor(private val githubReposit
 
             })
             .addTo(disposable)
+    }
+
+    fun getUserStarred(userName : String){
+        githubRepository.getUserStarred(userName)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .doOnSubscribe { _loadingState.postValue(true) }
+            .subscribe({
+                _userStarred.postValue(it)
+            }, {
+                Timber.e("${it.printStackTrace()}")
+
+            })
+            .addTo(disposable)
+
     }
 
 }
