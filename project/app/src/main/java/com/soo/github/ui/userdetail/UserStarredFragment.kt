@@ -2,6 +2,8 @@ package com.soo.github.ui.userdetail
 
 import android.os.Bundle
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.DividerItemDecoration
 import com.soo.github.R
 import com.soo.github.base.BaseFragment
 import com.soo.github.constants.Constants
@@ -27,13 +29,32 @@ class UserStarredFragment :
         }
     }
 
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        userName?.let {
+            viewModel.getUserStarred(it)
+        }
+        setupAdapter()
+        setupBind()
+    }
+
+    private fun setupBind() {
+        viewModel.userStarred.observe(viewLifecycleOwner, Observer {
+            adapter.setData(it)
+        })
+    }
+
+    private fun setupAdapter() {
+        binding.rvUserStarred.adapter = adapter
+        binding.rvUserStarred.addItemDecoration(DividerItemDecoration(context, 1))
+    }
+
     companion object {
-        fun newInstance(param1: String, param2: String) =
-            UserStarredFragment().apply {
-                arguments = Bundle().apply {
-                    putString(Constants.USERNAME, userName)
-                }
+        fun newInstance(userName: String) = UserStarredFragment().apply {
+            arguments = Bundle().apply {
+                putString(Constants.USERNAME, userName)
             }
+        }
     }
 
 }
