@@ -8,7 +8,6 @@ import com.soo.github.network.model.User
 import com.soo.github.network.repository.GithubRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.addTo
-import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 
 class MainViewModel @ViewModelInject constructor(private val githubRepository: GithubRepository) :
@@ -20,16 +19,13 @@ class MainViewModel @ViewModelInject constructor(private val githubRepository: G
     private val _user = MutableLiveData<User>()
     val user: LiveData<User> get() = _user
 
-    init {
-        getUserList()
-    }
-
-    private fun getUserList() {
-        githubRepository.getUserList().subscribeOn(Schedulers.io())
+    fun getUserList() {
+        showLoading()
+        githubRepository.getUserList()
             .observeOn(AndroidSchedulers.mainThread())
-            .doOnSubscribe { _loadingState.postValue(true) }
             .subscribe({
-                _userList.postValue(it)
+                _userList.value = it
+                hideLoading()
             }, {
                 Timber.e("${it.printStackTrace()}")
             })
