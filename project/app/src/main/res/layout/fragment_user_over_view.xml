@@ -5,13 +5,15 @@
 
     <data>
 
+        <import type="android.view.View" />
+
         <variable
                 name="userOverView"
                 type="com.soo.github.network.model.UserOverView" />
 
         <variable
                 name="vm"
-                type="com.soo.github.ui.vm.UserDetailViewModel" />
+                type="com.soo.github.ui.vm.UserOverViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -57,11 +59,106 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
+                android:paddingStart="25dp"
+                android:paddingEnd="20dp"
                 android:text="@{userOverView.bio}"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/iv_user_image"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/iv_user_image"
                 tools:text="bio" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_following_num"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:text="@{userOverView.following.toString()}"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toStartOf="@+id/tv_followers_num"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_bio"
+                tools:text="Following" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_followers_num"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:text="@{userOverView.followers.toString()}"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/tv_following_num"
+                app:layout_constraintTop_toBottomOf="@+id/tv_bio"
+                tools:text="Followers" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_company"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="30dp"
+                android:drawableStart="@drawable/ic_people_24px"
+                android:drawablePadding="20dp"
+                android:paddingStart="20dp"
+                android:paddingTop="5dp"
+                android:paddingEnd="20dp"
+                android:visibility="@{userOverView.company==null ? View.GONE : View.VISIBLE}"
+                android:text="@{userOverView.company}"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_followers_num"
+                tools:text="회사" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_location"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:drawableStart="@drawable/ic_room_24px"
+                android:drawablePadding="20dp"
+                android:paddingStart="20dp"
+                android:paddingTop="5dp"
+                android:paddingEnd="20dp"
+                android:text="@{userOverView.location}"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_company"
+                tools:text="장소" />
+
+        <TextView
+                android:id="@+id/tv_time"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:drawableStart="@drawable/ic_schedule_24px"
+                android:drawablePadding="20dp"
+                android:paddingStart="20dp"
+                android:paddingTop="5dp"
+                android:paddingEnd="20dp"
+                android:text="@{userOverView.createdAt.substring(0,8)}"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_location"
+                tools:text="시계" />
+
+
+        <ProgressBar
+                android:id="@+id/view_loading"
+                style="?android:attr/progressBarStyleLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:visibility="@{vm.loadingState ? View.VISIBLE : View.GONE}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:visibility="visible" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

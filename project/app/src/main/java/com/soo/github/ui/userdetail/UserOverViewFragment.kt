@@ -8,7 +8,7 @@ import com.soo.github.R
 import com.soo.github.base.BaseFragment
 import com.soo.github.constants.Constants
 import com.soo.github.databinding.FragmentUserOverViewBinding
-import com.soo.github.ui.vm.UserDetailViewModel
+import com.soo.github.ui.vm.UserOverViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -16,7 +16,7 @@ class UserOverViewFragment :
         BaseFragment<FragmentUserOverViewBinding>(layoutRes = R.layout.fragment_user_over_view) {
 
     private val userName by lazy { arguments?.getString(Constants.USERNAME) }
-    override val viewModel by viewModels<UserDetailViewModel>()
+    override val viewModel by viewModels<UserOverViewModel>()
 
     override fun setupViewModel() {
         binding.vm = viewModel
