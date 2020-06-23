@@ -7,14 +7,14 @@
 
         <variable
                 name="vm"
-                type="com.soo.github.ui.vm.UserDetailViewModel" />
+                type="com.soo.github.ui.vm.UserRepoAndStarredViewModel" />
 
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".ui.userdetail.UserRepositoryFragment">
+            tools:context=".ui.userdetail.UserRepoAndStarredFragment">
 
         <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_user_repo"
