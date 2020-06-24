@@ -11,7 +11,6 @@ open class BaseViewModel : ViewModel() {
     protected val _loadingState = MutableLiveData<Boolean>()
     val loadingState: LiveData<Boolean>
         get() = _loadingState
-    protected val errorMessage = MutableLiveData<String>()
 
     override fun onCleared() {
         super.onCleared()
