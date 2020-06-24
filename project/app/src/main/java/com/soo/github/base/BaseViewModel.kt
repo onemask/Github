@@ -13,8 +13,8 @@ open class BaseViewModel : ViewModel() {
         get() = _loadingState
 
     override fun onCleared() {
-        super.onCleared()
         disposable.clear()
+        super.onCleared()
     }
 
     open fun hideLoading() {
