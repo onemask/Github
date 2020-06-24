@@ -2,7 +2,7 @@ package com.soo.github.network.repository
 
 import com.soo.github.network.model.User
 import com.soo.github.network.model.UserOverView
-import com.soo.github.network.model.UserRepository
+import com.soo.github.network.model.UserRepo
 import com.soo.github.network.remote.GithubApiService
 import com.soo.github.network.remote.GithubRemoteDataSource
 import io.reactivex.Single
@@ -22,11 +22,11 @@ class GithubRepository(private val githubApiService: GithubApiService) :
         return githubApiService.getUserOverView(user).subscribeOn(ioScheduler)
     }
 
-    override fun getUserRepos(user: String): Single<List<UserRepository>> {
+    override fun getUserRepos(user: String): Single<List<UserRepo>> {
         return githubApiService.getUserRepos(user).subscribeOn(ioScheduler)
     }
 
-    override fun getUserStarred(user: String): Single<List<UserRepository>> {
+    override fun getUserStarred(user: String): Single<List<UserRepo>> {
         return githubApiService.getUserStarred(user).subscribeOn(ioScheduler)
     }
 
