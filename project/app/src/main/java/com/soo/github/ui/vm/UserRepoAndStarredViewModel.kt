@@ -10,7 +10,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.addTo
 import timber.log.Timber
 
-class UserRepoAndStarredViewModel  @ViewModelInject constructor(private val githubRepository: GithubRepository) :
+class UserRepoAndStarredViewModel @ViewModelInject constructor(private val githubRepository: GithubRepository) :
     BaseViewModel() {
 
     private val _userRepositories = MutableLiveData<List<UserRepository>>()
@@ -19,28 +19,30 @@ class UserRepoAndStarredViewModel  @ViewModelInject constructor(private val gith
     private val _userStarred = MutableLiveData<List<UserRepository>>()
     val userStarred: LiveData<List<UserRepository>> get() = _userStarred
 
-    fun getUserRepositories(userName : String){
+    fun getUserRepositories(userName: String) {
+        showLoading()
         githubRepository.getUserRepos(userName)
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe { _loadingState.postValue(true) }
             .subscribe({
                 _userRepositories.postValue(it)
+                hideLoading()
             }, {
                 Timber.e("${it.printStackTrace()}")
-
             })
             .addTo(disposable)
     }
 
-    fun getUserStarred(userName : String){
+    fun getUserStarred(userName: String) {
+        showLoading()
         githubRepository.getUserStarred(userName)
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe { _loadingState.postValue(true) }
             .subscribe({
                 _userStarred.postValue(it)
+                hideLoading()
             }, {
                 Timber.e("${it.printStackTrace()}")
-
             })
             .addTo(disposable)
 
