@@ -1,7 +1,8 @@
 package com.soo.github.constants
 
 object Constants {
-    val SERVER_HOST = "https://api.github.com"
-    val USERNAME = "userName"
-    val POSITION = "position"
+    const val SERVER_HOST = "https://api.github.com"
+    const val USERNAME = "userName"
+    const val POSITION = "position"
+    const val HEADER = "Authorization"
 }
