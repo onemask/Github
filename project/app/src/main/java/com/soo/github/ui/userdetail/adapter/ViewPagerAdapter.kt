@@ -9,7 +9,7 @@ import com.soo.github.constants.Constants.USERNAME
 import com.soo.github.ui.userdetail.UserOverViewFragment
 import com.soo.github.ui.userdetail.UserRepoAndStarredFragment
 
-class ViewPagerAdapter(fragmentManager: FragmentManager, val userName: String) :
+class ViewPagerAdapter(fragmentManager: FragmentManager, private val userName: String) :
     FragmentStatePagerAdapter(
         fragmentManager,
         BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT
