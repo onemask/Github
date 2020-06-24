@@ -1,6 +1,6 @@
 package com.soo.github.ui.userdetail.adapter
 
-import android.os.Bundle
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
@@ -17,19 +17,19 @@ class ViewPagerAdapter(fragmentManager: FragmentManager, private val userName: S
     private var titles = mutableListOf("OVERVIEW", "REPOSITORIES", "STARRED")
 
     private val fragmentList: List<Fragment> = listOf(
-        UserOverViewFragment.newInstance(),
-        UserRepoAndStarredFragment.newInstance(),
-        UserRepoAndStarredFragment.newInstance()
+        UserOverViewFragment(),
+        UserRepoAndStarredFragment(),
+        UserRepoAndStarredFragment()
     )
 
     override fun getPageTitle(position: Int): CharSequence? = titles[position]
 
     override fun getItem(position: Int): Fragment {
         return fragmentList[position].apply {
-            arguments = Bundle().apply {
-                putInt(POSITION, position)
-                putString(USERNAME, userName)
-            }
+            arguments = bundleOf(
+                POSITION to position,
+                USERNAME to userName
+            )
         }
     }
 
