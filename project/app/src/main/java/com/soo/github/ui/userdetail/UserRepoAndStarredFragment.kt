@@ -1,17 +1,17 @@
 package com.soo.github.ui.userdetail
 
 import android.os.Bundle
+import android.util.ArrayMap
+import androidx.databinding.library.baseAdapters.BR
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.DividerItemDecoration
 import com.soo.github.R
+import com.soo.github.base.BaseAdapter
 import com.soo.github.base.BaseFragment
+import com.soo.github.base.BaseViewModel
 import com.soo.github.constants.Constants
 import com.soo.github.constants.Constants.POSITION
 import com.soo.github.databinding.FragmentUserRepositoryBinding
-import com.soo.github.ui.userdetail.adapter.UserRepositoryAdapter
-import com.soo.github.ui.userdetail.adapter.UserStarredAdapter
-import com.soo.github.ui.userdetail.vm.UserRepoAndStarredViewModel
+import com.soo.github.network.model.UserRepo
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -22,16 +22,12 @@ class UserRepoAndStarredFragment :
     private val userName by lazy { arguments?.getString(Constants.USERNAME) }
     private val position by lazy { arguments?.getInt(POSITION) }
 
-    private val repoAdapter by lazy { UserRepositoryAdapter(viewModel) }
-    private val starredAdapter by lazy { UserStarredAdapter(viewModel) }
-
     override val viewModel by viewModels<UserRepoAndStarredViewModel>()
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         showContent()
         setupAdapter()
-        setupBind()
     }
 
     private fun showContent() {
@@ -41,37 +37,24 @@ class UserRepoAndStarredFragment :
         }
     }
 
-    private fun setupBind() {
-        when (position) {
-            1 -> viewModel.userRepositories.observe(viewLifecycleOwner, Observer {
-                repoAdapter.setData(it)
-            })
-            2 -> viewModel.userStarred.observe(viewLifecycleOwner, Observer {
-                starredAdapter.setData(it)
-            })
-        }
-    }
-
     private fun setupAdapter() {
         when (position) {
-            1 -> binding.rvUserRepo.also {
-                it.adapter = repoAdapter
-                it.addItemDecoration(DividerItemDecoration(context, 1))
-            }
-            2 -> binding.rvUserRepo.also {
-                it.adapter = starredAdapter
-                it.addItemDecoration(DividerItemDecoration(context, 1))
-            }
+            1 -> binding.rvUserRepo.adapter = BaseAdapter<UserRepo>(
+                layoutBindingId = Pair(R.layout.item_user_repository, BR.userRepo),
+                viewModels = ArrayMap<Int, BaseViewModel>().apply {
+                    put(BR.vm, viewModel)
+                }
+            )
+            2 -> binding.rvUserStarred.adapter = BaseAdapter<UserRepo>(
+                layoutBindingId = Pair(R.layout.item_user_starred, BR.userRepo),
+                viewModels = ArrayMap<Int, BaseViewModel>().apply {
+                    put(BR.vm, viewModel)
+                }
+            )
         }
-
     }
 
     override fun setupViewModel() {
         binding.vm = viewModel
     }
-
-    companion object {
-        fun newInstance() = UserRepoAndStarredFragment()
-    }
-
 }
