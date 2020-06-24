@@ -19,11 +19,12 @@ open class BaseAdapter<ITEM : Any>(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         BaseViewHolder(parent, layoutBindingId, viewModels)
 
-    fun replaceItems(items: List<ITEM>?) {
+    fun setItem(items: List<ITEM>?) {
         if (items == null) return
         dataSet.run {
             clear()
             addAll(items)
         }
+        notifyDataSetChanged()
     }
 }
