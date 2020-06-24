@@ -25,7 +25,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>(layoutRes = R.layout.frag
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        setupAdpater()
+        setupAdapter()
         setupObserve()
         showContents()
     }
@@ -34,7 +34,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>(layoutRes = R.layout.frag
         viewModel.getUserList()
     }
 
-    private fun setupAdpater() {
+    private fun setupAdapter() {
         binding.rvUserList.adapter = adapter
     }
 
