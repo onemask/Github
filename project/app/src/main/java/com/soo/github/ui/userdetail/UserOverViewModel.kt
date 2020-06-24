@@ -1,38 +1,33 @@
-package com.soo.github.ui.user.vm
+package com.soo.github.ui.userdetail
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.soo.github.base.BaseViewModel
-import com.soo.github.network.model.User
+import com.soo.github.network.model.UserOverView
 import com.soo.github.network.repository.GithubRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.addTo
 import timber.log.Timber
 
-class MainViewModel @ViewModelInject constructor(private val githubRepository: GithubRepository) :
+class UserOverViewModel @ViewModelInject constructor(private val githubRepository: GithubRepository) :
     BaseViewModel() {
 
-    private val _userList = MutableLiveData<List<User>>()
-    val userList: LiveData<List<User>> get() = _userList
+    private val _userOverView = MutableLiveData<UserOverView>()
+    val userOverView: LiveData<UserOverView> get() = _userOverView
 
-    private val _user = MutableLiveData<User>()
-    val user: LiveData<User> get() = _user
-
-    fun getUserList() {
+    fun getUserOverView(userName: String) {
         showLoading()
-        githubRepository.getUserList()
+        githubRepository.getUserOverView(userName)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                _userList.value = it
+                _userOverView.postValue(it)
                 hideLoading()
             }, {
                 Timber.e("${it.printStackTrace()}")
+
             })
             .addTo(disposable)
     }
 
-    fun showUserDetail(data: User) {
-        _user.value = data
-    }
 }
