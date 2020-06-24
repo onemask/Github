@@ -8,7 +8,7 @@ import com.soo.github.R
 import com.soo.github.base.BaseFragment
 import com.soo.github.constants.Constants
 import com.soo.github.databinding.FragmentUserOverViewBinding
-import com.soo.github.ui.vm.UserOverViewModel
+import com.soo.github.ui.userdetail.vm.UserOverViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

@@ -7,7 +7,7 @@
 
         <variable
                 name="vm"
-                type="com.soo.github.ui.vm.UserRepoAndStarredViewModel" />
+                type="com.soo.github.ui.userdetail.vm.UserRepoAndStarredViewModel" />
 
         <variable
                 name="userRepo"

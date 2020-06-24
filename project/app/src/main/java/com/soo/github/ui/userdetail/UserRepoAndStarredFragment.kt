@@ -11,7 +11,7 @@ import com.soo.github.constants.Constants.POSITION
 import com.soo.github.databinding.FragmentUserRepositoryBinding
 import com.soo.github.ui.userdetail.adapter.UserRepositoryAdapter
 import com.soo.github.ui.userdetail.adapter.UserStarredAdapter
-import com.soo.github.ui.vm.UserRepoAndStarredViewModel
+import com.soo.github.ui.userdetail.vm.UserRepoAndStarredViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -62,7 +62,6 @@ class UserRepoAndStarredFragment :
                 it.adapter = starredAdapter
                 it.addItemDecoration(DividerItemDecoration(context, 1))
             }
-
         }
 
     }

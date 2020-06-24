@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.soo.github.R
 import com.soo.github.databinding.ItemUserStarredBinding
 import com.soo.github.network.model.UserRepository
-import com.soo.github.ui.vm.UserRepoAndStarredViewModel
+import com.soo.github.ui.userdetail.vm.UserRepoAndStarredViewModel
 
 class UserStarredAdapter(private val andStarredViewModel: UserRepoAndStarredViewModel) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {

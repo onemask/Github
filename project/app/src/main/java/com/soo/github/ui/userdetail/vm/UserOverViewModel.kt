@@ -1,4 +1,4 @@
-package com.soo.github.ui.vm
+package com.soo.github.ui.userdetail.vm
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
