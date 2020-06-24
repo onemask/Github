@@ -10,7 +10,7 @@
 
         <variable
             name="vm"
-            type="com.soo.github.ui.user.vm.MainViewModel" />
+            type="com.soo.github.ui.user.MainViewModel" />
 
     </data>
 
@@ -36,7 +36,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:visibility="@{vm.loadingState ? View.VISIBLE : View.GONE}"
+            android:visibility="@{safeUnbox(vm.loadingState) ? View.VISIBLE : View.GONE}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
