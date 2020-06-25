@@ -28,6 +28,7 @@ class UserRepoAndStarredViewModel @ViewModelInject constructor(private val githu
                 hideLoading()
             }, {
                 Timber.e("${it.printStackTrace()}")
+                errorMessage.value = it.message
             })
             .addTo(disposable)
     }
@@ -41,6 +42,7 @@ class UserRepoAndStarredViewModel @ViewModelInject constructor(private val githu
                 hideLoading()
             }, {
                 Timber.e("${it.printStackTrace()}")
+                errorMessage.value = it.message
             })
             .addTo(disposable)
 

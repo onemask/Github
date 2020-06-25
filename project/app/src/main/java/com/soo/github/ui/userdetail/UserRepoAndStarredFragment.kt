@@ -2,8 +2,10 @@ package com.soo.github.ui.userdetail
 
 import android.os.Bundle
 import android.util.ArrayMap
+import android.widget.Toast
 import androidx.databinding.library.baseAdapters.BR
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import com.soo.github.R
 import com.soo.github.base.BaseAdapter
 import com.soo.github.base.BaseFragment
@@ -28,6 +30,11 @@ class UserRepoAndStarredFragment :
         super.onActivityCreated(savedInstanceState)
         showContent()
         setupAdapter()
+        setupObserve()
+    }
+
+    override fun setupViewModel() {
+        binding.vm = viewModel
     }
 
     private fun showContent() {
@@ -54,7 +61,10 @@ class UserRepoAndStarredFragment :
         }
     }
 
-    override fun setupViewModel() {
-        binding.vm = viewModel
+    private fun setupObserve(){
+        viewModel.errorMessage.observe(viewLifecycleOwner, Observer {
+            Toast.makeText(this.context, it, Toast.LENGTH_SHORT).show()
+        })
     }
+
 }

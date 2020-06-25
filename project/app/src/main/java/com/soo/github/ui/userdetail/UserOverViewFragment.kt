@@ -1,6 +1,7 @@
 package com.soo.github.ui.userdetail
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.core.net.toUri
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -31,6 +32,10 @@ class UserOverViewFragment :
         viewModel.userOverView.observe(viewLifecycleOwner, Observer {
             binding.userOverView = it
             binding.ivUserImage.setImageURI(it.avatarUrl.toUri(), binding.ivUserImage.context)
+        })
+
+        viewModel.errorMessage.observe(viewLifecycleOwner, Observer {
+            Toast.makeText(this.context, it, Toast.LENGTH_SHORT).show()
         })
     }
 }

@@ -25,7 +25,7 @@ class UserOverViewModel @ViewModelInject constructor(private val githubRepositor
                 hideLoading()
             }, {
                 Timber.e("${it.printStackTrace()}")
-
+                errorMessage.value = it.message
             })
             .addTo(disposable)
     }
