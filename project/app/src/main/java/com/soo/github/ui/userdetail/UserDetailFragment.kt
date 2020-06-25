@@ -1,6 +1,7 @@
 package com.soo.github.ui.userdetail
 
 import android.os.Bundle
+import androidx.activity.OnBackPressedCallback
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
@@ -17,7 +18,7 @@ class UserDetailFragment : BaseFragment<FragmentUserDetailBinding>(
     R.layout.fragment_user_detail
 ) {
     private lateinit var navController: NavController
-    private lateinit var viewPagerAdapter : ViewPagerAdapter
+    private lateinit var viewPagerAdapter: ViewPagerAdapter
     private val name: UserDetailFragmentArgs by navArgs()
 
     override val viewModel: BaseViewModel = BaseViewModel()
@@ -26,6 +27,7 @@ class UserDetailFragment : BaseFragment<FragmentUserDetailBinding>(
         super.onActivityCreated(savedInstanceState)
         setupToolbar()
         setupAdapter()
+        setupBackBtn()
         navController = Navigation.findNavController(this.requireActivity(), R.id.product_nav_host_fragment)
     }
 
@@ -41,6 +43,15 @@ class UserDetailFragment : BaseFragment<FragmentUserDetailBinding>(
         viewPagerAdapter = ViewPagerAdapter(requireParentFragment().parentFragmentManager, name.takeUserNames)
         binding.vp.adapter = viewPagerAdapter
         binding.layoutTap.setupWithViewPager(binding.vp)
+    }
+
+    private fun setupBackBtn() {
+        val callBack = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                navController.navigate(R.id.action_detail_to_main)
+            }
+        }
+        activity?.onBackPressedDispatcher?.addCallback(callBack)
     }
 
 }
