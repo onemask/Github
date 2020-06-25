@@ -8,6 +8,8 @@ import io.reactivex.disposables.CompositeDisposable
 open class BaseViewModel : ViewModel() {
 
     protected val disposable = CompositeDisposable()
+    val errorMessage = MutableLiveData<String>()
+
     protected val _loadingState = MutableLiveData<Boolean>()
     val loadingState: LiveData<Boolean>
         get() = _loadingState
