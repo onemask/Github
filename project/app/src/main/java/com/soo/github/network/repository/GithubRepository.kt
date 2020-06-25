@@ -14,7 +14,6 @@ class GithubRepository(private val githubApiService: GithubApiService) :
     private val ioScheduler = Schedulers.io()
 
     override fun getUserList(): Single<List<User>> {
-        //TODO("localRepository랑 분리 필요")
         return githubApiService.getUserList().subscribeOn(ioScheduler)
     }
 
