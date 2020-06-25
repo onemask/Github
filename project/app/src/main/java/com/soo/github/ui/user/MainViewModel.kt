@@ -28,6 +28,7 @@ class MainViewModel @ViewModelInject constructor(private val githubRepository: G
                 hideLoading()
             }, {
                 Timber.e("${it.printStackTrace()}")
+                errorMessage.value = it.message
             })
             .addTo(disposable)
     }

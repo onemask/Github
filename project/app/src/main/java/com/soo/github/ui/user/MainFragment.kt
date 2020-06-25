@@ -2,6 +2,7 @@ package com.soo.github.ui.user
 
 import android.os.Bundle
 import android.util.ArrayMap
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.databinding.library.baseAdapters.BR
 import androidx.fragment.app.viewModels
@@ -53,6 +54,9 @@ class MainFragment : BaseFragment<FragmentMainBinding>(layoutRes = R.layout.frag
             if (it.login == null) return@Observer
             val action = MainFragmentDirections.actionMainToDetail(takeUserNames = it.login)
             findNavController().navigate(action)
+        })
+        viewModel.errorMessage.observe(viewLifecycleOwner, Observer {
+            Toast.makeText(this.context, it, Toast.LENGTH_SHORT).show()
         })
     }
 
