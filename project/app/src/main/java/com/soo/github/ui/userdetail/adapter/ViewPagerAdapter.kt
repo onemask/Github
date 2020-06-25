@@ -14,7 +14,7 @@ class ViewPagerAdapter(fragmentManager: FragmentManager, private val userName: S
         fragmentManager,
         BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT
     ) {
-    private var titles = mutableListOf("OVERVIEW", "REPOSITORIES", "STARRED")
+    private val titles = mutableListOf("OVERVIEW", "REPOSITORIES", "STARRED")
 
     private val fragmentList: List<Fragment> = listOf(
         UserOverViewFragment(),
