@@ -37,7 +37,7 @@ fun textColor(view: TextView, language: String?) {
         "TypeScript" -> R.color.color_blue
         "C++" -> R.color.color_pink
         "C#" -> R.color.color_green
-        "Ruby" -> R.color.color_black
+        "Ruby" -> R.color.color_orange_red
         else -> R.color.colorPrimary
     }
     view.setTextColor(ContextCompat.getColor(view.context, color))
