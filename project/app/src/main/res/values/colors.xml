@@ -12,6 +12,7 @@
     <color name="color_pink">#ec407a</color>
     <color name="color_green">#1b5e20</color>
     <color name="color_red">#d50000</color>
+    <color name="color_orange_red">#F44336</color>
 
 
 </resources>
