@@ -19,11 +19,11 @@ open class BaseViewModel : ViewModel() {
         super.onCleared()
     }
 
-    open fun hideLoading() {
+    protected fun hideLoading() {
         _loadingState.value = false
     }
 
-    open fun showLoading() {
+    protected fun showLoading() {
         _loadingState.value = true
     }
 }
