@@ -3,7 +3,6 @@ package com.soo.github.ui.user
 import android.os.Bundle
 import android.util.ArrayMap
 import android.widget.Toast
-import androidx.core.os.bundleOf
 import androidx.databinding.library.baseAdapters.BR
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -12,7 +11,6 @@ import com.soo.github.R
 import com.soo.github.base.BaseAdapter
 import com.soo.github.base.BaseFragment
 import com.soo.github.base.BaseViewModel
-import com.soo.github.constants.Constants
 import com.soo.github.databinding.FragmentMainBinding
 import com.soo.github.network.model.User
 import dagger.hilt.android.AndroidEntryPoint
@@ -48,9 +46,6 @@ class MainFragment : BaseFragment<FragmentMainBinding>(layoutRes = R.layout.frag
 
     private fun setupObserve() {
         viewModel.user.observe(viewLifecycleOwner, Observer {
-            bundleOf(
-                Constants.USERNAME to it.login
-            )
             if (it.login == null) return@Observer
             val action = MainFragmentDirections.actionMainToDetail(takeUserNames = it.login)
             findNavController().navigate(action)

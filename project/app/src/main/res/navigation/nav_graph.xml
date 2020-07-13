@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/fragment_main"
         android:name="com.soo.github.ui.user.MainFragment"
-        android:label="fragment_main"
+        android:label="Github"
         tools:layout="@layout/fragment_main">
         <action
             app:popUpToInclusive="true"
@@ -21,7 +21,7 @@
     <fragment
         android:id="@+id/fragment_detail"
         android:name="com.soo.github.ui.userdetail.UserDetailFragment"
-        android:label="fragment_detail"
+        android:label="User Detail"
         tools:layout="@layout/fragment_user_detail">
         <argument
             android:name="takeUserNames"

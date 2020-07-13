@@ -21,7 +21,7 @@ class UserOverViewModel @ViewModelInject constructor(private val githubRepositor
         githubRepository.getUserOverView(userName)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                _userOverView.postValue(it)
+                _userOverView.value = it
                 hideLoading()
             }, {
                 Timber.e("${it.printStackTrace()}")

@@ -5,8 +5,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupWithNavController
 import com.soo.github.R
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.activity_main.*
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -20,7 +22,6 @@ class MainActivity : AppCompatActivity() {
 
         navController = Navigation.findNavController(this, R.id.product_nav_host_fragment)
         appBarConfiguration = AppBarConfiguration(navController.graph)
+        toolbar.setupWithNavController(navController, appBarConfiguration)
     }
-
-
 }
