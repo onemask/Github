@@ -19,9 +19,15 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         navController = Navigation.findNavController(this, R.id.product_nav_host_fragment)
         appBarConfiguration = AppBarConfiguration(navController.graph)
-        toolbar.setupWithNavController(navController, appBarConfiguration)
+        setupToolbar()
+    }
+
+    private fun setupToolbar() = with(toolbar) {
+        setupWithNavController(navController, appBarConfiguration)
+        setNavigationOnClickListener {
+            navController.navigate(R.id.action_detail_to_main)
+        }
     }
 }
