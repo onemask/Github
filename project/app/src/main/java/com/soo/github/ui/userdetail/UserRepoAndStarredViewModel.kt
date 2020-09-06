@@ -3,12 +3,13 @@ package com.soo.github.ui.userdetail
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.soo.github.base.BaseViewModel
 import com.soo.github.network.model.UserRepo
 import com.soo.github.network.repository.GithubRepository
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.rxkotlin.addTo
-import timber.log.Timber
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class UserRepoAndStarredViewModel @ViewModelInject constructor(private val githubRepository: GithubRepository) :
     BaseViewModel() {
@@ -21,31 +22,26 @@ class UserRepoAndStarredViewModel @ViewModelInject constructor(private val githu
 
     fun getUserRepositories(userName: String) {
         showLoading()
-        githubRepository.getUserRepos(userName)
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                _userRepositories.value = it
+        viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
+            withContext(Dispatchers.Main) {
+                githubRepository.getUserRepos(userName).apply {
+                    _userRepositories.value = this
+                }
                 hideLoading()
-            }, {
-                Timber.e("${it.printStackTrace()}")
-                errorMessage.value = it.message
-            })
-            .addTo(disposable)
+            }
+        }
     }
+
 
     fun getUserStarred(userName: String) {
         showLoading()
-        githubRepository.getUserStarred(userName)
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                _userStarred.value = it
+        viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
+            withContext(Dispatchers.Main) {
+                githubRepository.getUserStarred(userName).apply {
+                    _userStarred.value = this
+                }
                 hideLoading()
-            }, {
-                Timber.e("${it.printStackTrace()}")
-                errorMessage.value = it.message
-            })
-            .addTo(disposable)
-
+            }
+        }
     }
-
 }
