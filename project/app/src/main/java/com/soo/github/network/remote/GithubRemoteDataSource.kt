@@ -3,14 +3,13 @@ package com.soo.github.network.remote
 import com.soo.github.network.model.User
 import com.soo.github.network.model.UserOverView
 import com.soo.github.network.model.UserRepo
-import io.reactivex.Single
 
 interface GithubRemoteDataSource {
-    fun getUserList(): Single<List<User>>
+    suspend fun getUserList(): List<User>
 
-    fun getUserOverView(user: String): Single<UserOverView>
+    suspend fun getUserOverView(user: String): UserOverView
 
-    fun getUserRepos(user: String): Single<List<UserRepo>>
+    suspend fun getUserRepos(user: String): List<UserRepo>
 
-    fun getUserStarred(user: String): Single<List<UserRepo>>
+    suspend fun getUserStarred(user: String): List<UserRepo>
 }
