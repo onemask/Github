@@ -3,12 +3,13 @@ package com.soo.github.ui.user
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.soo.github.base.BaseViewModel
 import com.soo.github.network.model.User
 import com.soo.github.network.repository.GithubRepository
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.rxkotlin.addTo
-import timber.log.Timber
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class MainViewModel @ViewModelInject constructor(private val githubRepository: GithubRepository) :
     BaseViewModel() {
@@ -21,16 +22,15 @@ class MainViewModel @ViewModelInject constructor(private val githubRepository: G
 
     fun getUserList() {
         showLoading()
-        githubRepository.getUserList()
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                _userList.value = it
+        viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
+            withContext(Dispatchers.Main) {
+                githubRepository.getUserList().apply {
+                    _userList.value = this
+                }
                 hideLoading()
-            }, {
-                Timber.e("${it.printStackTrace()}")
-                errorMessage.value = it.message
-            })
-            .addTo(disposable)
+            }
+        }
+
     }
 
     fun showUserDetail(data: User) {
